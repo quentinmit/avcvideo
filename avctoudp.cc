@@ -96,7 +96,7 @@ IOReturn MyStructuredDataPushProc(UInt32 CycleDataCount, MPEGReceiveCycleData *p
 {
   int vectIndex = 0;
   struct iovec iov[kNumCyclesInMPEGReceiverSegment*5];
-  int viewerSocket = (int) pRefCon;
+  int viewerSocket = (long) pRefCon;
   
   if (viewerSocket)
     {
@@ -107,6 +107,7 @@ IOReturn MyStructuredDataPushProc(UInt32 CycleDataCount, MPEGReceiveCycleData *p
 	      iov[vectIndex].iov_base = pCycleData[cycle].pBuf[sourcePacket];
 	      iov[vectIndex].iov_len = kMPEG2TSPacketSize;
 	      vectIndex += 1;
+	      packetCount++;
 	    }
 	}
       
